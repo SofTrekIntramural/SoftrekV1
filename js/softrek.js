@@ -36,15 +36,6 @@
     // Successfully took picture, so set it to image variable
 	// in html file and display it
     function onPicCaptureSuccess(imageData) {
-        /* 
-		var date = ""
-        var d = new Date();
-        date = "" + d.getDate() + "-" + (d.getMonth() + 1) + "-"
-                + d.getFullYear();
-        //alert(date)
-        //alert(imageData);  
-        */
-	
         // get and set img id is myImage
         var myImage = document.getElementById('myImage');
 		
