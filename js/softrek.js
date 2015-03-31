@@ -97,47 +97,6 @@
     }
 
  	/*====================================== BUTTON FUNCTIONS =======================================*/   
-	// THE TWO FUNCTIONS BELOW ARE FOR TESTING ONLY
-	/*
-	function dataURItoBlob(dataURI)
-	{
-		var byteString = atob(dataURI.split(',')[1]);
-
-		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-		var ab = new ArrayBuffer(byteString.length);
-		var ia = new Uint8Array(ab);
-		for (var i = 0; i < byteString.length; i++)
-		{
-			ia[i] = byteString.charCodeAt(i);
-		}
-
-		var bb = new Blob([ab], { "type": mimeString });
-		return bb;
-	}
-
-	function loadImageFileAsURL()
-	{
-		var filesSelected = document.getElementById("inputFileToLoad").files;
-		if (filesSelected.length > 0)
-		{
-			var fileToLoad = filesSelected[0];
-
-			var fileReader = new FileReader();
-
-			fileReader.onload = function(fileLoadedEvent) 
-			{
-				var textAreaFileContents = document.getElementById("textAreaFileContents");
-		        //var blob = dataURItoBlob(fileLoadedEvent.target.result);
-				textAreaFileContents.innerHTML = blob;
-				document.getElementById("inputFileToLoad").files[0] = fileLoadedEvent.target.result;
-			};
-
-			fileReader.readAsDataURL(fileToLoad);
-		}
-	}
-	*/
-
 	// SET THE UPLOAD/DELETE IMAGE IDNUMBER
 	function setProfileAccount(idnum){
 		var upform = document.getElementById('upload-form');
