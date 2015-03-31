@@ -31,57 +31,112 @@
 		<script type="text/javascript" src="cordova.js"></script>		
 		<!-- SHOULD ALLOW FOR CROSS DOMAIN AJAX... -->
 		<script type="text/javascript" src="js/jquery.js"> <!--http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js-->
-		$(document).bind("mobileinit", function() {
-			$.support.cors = true;
-			$.mobile.allowCrossDomainPages = true;
-		});
+			$(document).bind("mobileinit", function() {
+				$.support.cors = true;
+				$.mobile.allowCrossDomainPages = true;
+			});
 		</script>
 		<script type="text/javascript" src="js/jmobile.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="js/softrek.js">	</script>
+		<script type="text/javascript" src="js/softrek.js"></script>
 		<!-- FOR KEEPING PAGES WITHIN THE APP -->
 		<script type="text/javascript"> app.initialize(); </script>	
         <title>Softrek Picture Upload</title>
     </head>
     <body>
-		<div data-role="panel" id="myPanel" data-position="right"> 
-			<input type="text" name="userTxt" id="userTxt" value="Search for user...">
-			<button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUser()">Search</button>
+	
+	    <!-- PANELS MUST BE LISTED ABOVE HEADERS -->
+		<div data-role="panel" id="searchPanel" data-position="right" data-display="overlay"> 
+			<form class="ui-filterable">
+			  <input id="myFilter" data-type="search">
+			</form>
+			<button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUsers()">Search</button> 
+						
+			<ul  id="lelist" data-role="listview" data-autodividers="true" data-filter="true" data-input="#myFilter" data-inset="true">
+			<li><a href="#">Adele</a></li>
+			</ul>
+			<!-- MAKE THIS INTO A BUTTON -->
+			<!-- <a href="#myHeader" data-rel="close">Close</a> -->
 	    </div>
-		
-		<div data-role="header">
-		    <a href="#" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
-			<h1>InstaSoft</h1>
-			<a href="#myPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all ui-shadow">Search</a>
-		</div>
-	
-	
-		<!-- BUTTONS FOR SELECTIONS	-->
-		<div data-role="main" class="ui-content">
-		    <br><br>
-		    Picture Upload:
-			<form id="the-form" method="POST" action="http://democv.softrek.com:8082/clearview-api/external/prospect/1/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e" enctype="multipart/form-data">
+		<!-- TODO: FIX NEEDED; CAN ONLY ACCESS PICTURES UPLOADED FROM WEB NOT PHONE -->
+		<div data-role="panel" id="uploadPanel" data-position="left" data-display="overlay"> 
+			<form id="upload-form" method="POST" action="http://democv.softrek.com:8082/clearview-api/external/prospect/1/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e" enctype="multipart/form-data">
 				<input name="description" type="text" value="Enter description">
-				<input name="attachmentType" type="text" value="PRO">
-				<input name="data" type="file">
+				<select id="myselect">
+				<option>PRO</option>
+				<option>PIC</option>
+				</select>
+				<input id="inputSel" style="display:none" name="attachmentType" type="text" value="PRO" >
+				<script>
+					$("select").change(function(){ 		
+						var levalue = document.getElementById("inputSel");		
+						levalue.value = $("#myselect option:selected").text(); 					
+					}); 
+					$( "#the-form" ).click(function() {
+						$( "select" ).change();
+					});				
+				</script>				
+				<input id="inputFileToLoad" name="data" type="file" onchange="loadImageFileAsURL();" />
+				<!-- CODE FOR CONVERTING BASE64 TO URL
+				<textarea id="textAreaFileContents" style="width:640;height:240" ></textarea> -->
 				<input style="display:none" name="token" type="text" value="f37f22f4-4eea-4c93-a241-2723a879971e">
+				<!-- <input style="display:none" name="uploadType" type="text" value="html5"> -->
 				<input data-icon="action" value="Upload Image" type="submit" >
 			</form>
-			<br>
-			<br>
-			<!-- <input type="text" name="userTxt" id="userTxt" value="Search for user..."> -->
-			<!-- <button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUser()">Search</button> -->
-			<br>		
-
-			<br>
-			<img id="myImage" src=""></img> <!--  left: 50%; style="width:250px; height:120px; margin-left:-125px; position: absolute" -->
-			<br>
-		</div>	
-
-		<div data-role="footer">	
-			<button class="ui-btn ui-icon-camera ui-btn-icon-left" onclick="takePic();">Take a Picture</button>
-			<button class="ui-btn ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);">Library</button>		
-			<button class="ui-btn ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);">Album</button>	
+	    </div>
+		
+		<div data-role="header" id="myHeader">
+		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all ui-shadow">Upload</a>
+			<h1>PeopleTrek</h1>
+			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all ui-shadow">Search</a>
 		</div>
+	
+		<!-- MAIN -->
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-solo ui-responsive">
+				<div class="ui-block-a" style="text-align:center">
+				  
+				    <!-- PROFILE PICTURE -->
+				  	<img id="myImage" src="" style="max-width: 100%;"></img>
+					<br>
+					<script>
+						$("#myImage").on("taphold",function(){
+							var delform = document.getElementById('delete-form');
+							delform.submit();
+							<!-- IMPLEMENT DELETE FORM IN AJAX OR CODE RATHER THAN FORM --?	
+						}); 
+					</script>
+				
+						<!-- BUTTONS BELOW MAIN PICTURE -->
+						<button class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-notext" onclick=""></button>
+						<button class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-notext" onclick=" document.getElementById('delete-form').submit()">Delete</button>
+						
+						<!-- DELETE PIC -->
+						<form id="delete-form" style="display:none"  method="GET" action="http://democv.softrek.com:8082/clearview-api/external/attachment/delete?token=f37f22f4-4eea-4c93-a241-2723a879971e" enctype="multipart/form-data">
+						<input style="display:none" id="delID" name="idNumber" type="text" value="">
+						<input style="display:none" id="delTrans" name="transnum" type="text" value="">
+						<input style="display:none" name="token" type="text" value="f37f22f4-4eea-4c93-a241-2723a879971e">
+						<input value="Delete?" type="submit" >
+						</form> 
+						<button class="ui-btn ui-btn-inline ui-icon-arrow-r ui-btn-icon-notext" onclick=""></button>
+						<!-- USER DATA -->
+						<span>
+							<ul id="mainList" data-role="listview" data-autodividers="false" data-inset="true" style="word-wrap:break-word;">
+							<li id="nameid">Name:</li>
+							<li id="phoneid">Phone:</li>
+							<li id="addressid">Address:</li>
+							<li id="addyoverflow"></li>
+							</ul>
+						</span>
+				</div>
+			</div>
+		</div><!-- /MAIN -->
+
+		<div data-role="footer" style="text-align:center;">	
+			<button class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left" onclick="takePic();">Camera</button>
+			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);">Library</button>		
+			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);">Album</button>			
+		</div>
+
 	</body>
 </html>

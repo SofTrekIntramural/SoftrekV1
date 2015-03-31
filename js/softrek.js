@@ -9,6 +9,7 @@
 	* Install: replace index.html with the provided one	also
                add softrek.js to js folder	
     * TODO:	 - Documentation
+			 - HANDLE JSON RETURNED FROM PICTURE UPLOAD
 			 - Sanity/Security Checking
 			 - CSS HTML
 			 - Test on multiple browsers, and then IOS...
@@ -96,25 +97,169 @@
     }
 
  	/*====================================== BUTTON FUNCTIONS =======================================*/   
-    // search database for user
-    function findUser() {
-        // Get textbox handle, query for user, and display processed result
-        var userQuery = document.getElementById('userTxt').value;
+	// THE TWO FUNCTIONS BELOW ARE FOR TESTING ONLY
+	/*
+	function dataURItoBlob(dataURI)
+	{
+		var byteString = atob(dataURI.split(',')[1]);
+
+		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+		var ab = new ArrayBuffer(byteString.length);
+		var ia = new Uint8Array(ab);
+		for (var i = 0; i < byteString.length; i++)
+		{
+			ia[i] = byteString.charCodeAt(i);
+		}
+
+		var bb = new Blob([ab], { "type": mimeString });
+		return bb;
+	}
+
+	function loadImageFileAsURL()
+	{
+		var filesSelected = document.getElementById("inputFileToLoad").files;
+		if (filesSelected.length > 0)
+		{
+			var fileToLoad = filesSelected[0];
+
+			var fileReader = new FileReader();
+
+			fileReader.onload = function(fileLoadedEvent) 
+			{
+				var textAreaFileContents = document.getElementById("textAreaFileContents");
+		        //var blob = dataURItoBlob(fileLoadedEvent.target.result);
+				textAreaFileContents.innerHTML = blob;
+				document.getElementById("inputFileToLoad").files[0] = fileLoadedEvent.target.result;
+			};
+
+			fileReader.readAsDataURL(fileToLoad);
+		}
+	}
+	*/
+
+	// SET THE UPLOAD/DELETE IMAGE IDNUMBER
+	function setProfileAccount(idnum){
+		var upform = document.getElementById('upload-form');
+		var delformID = document.getElementById('delID');
+		upform.action = "http://democv.softrek.com:8082/clearview-api/external/prospect/" + idnum + "/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e";
+		delformID.value = idnum;
+	}
+	
+	// QUERY SERVER FOR PROFILE PICTURE
+    function updateProfilePic(idnum){
+		var id = idnum;
+		var leimage = document.getElementById('myImage');
+		var delformTrans = document.getElementById('delTrans');
+		var queryURL = "http://democv.softrek.com:8082/clearview-api/external/prospect/" + idnum +"/images?token=f37f22f4-4eea-4c93-a241-2723a879971e";
+		var request = new XMLHttpRequest();
+		
+		// SET THE ACCOUNT IDS
+		setProfileAccount(id);
+		
+		// CLEAR THE ORIGINAL PICTURE
+		leimage.src = "";
+		request.open("GET", queryURL, true);
+		
+		request.onreadystatechange = function() { // Call a function when the state changes.
+			if (request.readyState == 4) {
+				if (request.status == 200 || request.status == 0) {
+					try{
+						var ledata = JSON.parse(request.response);
+						console.log("Response is " + request.responseText);
+						console.log("encoded pic " + ledata[0].documentContent);
+						
+						delformTrans.value = ledata[0].transnum;
+						leimage.src = "data:image/jpeg;base64," + ledata[0].documentContent;
+						if(ledata[0].documentContent == null)
+							leimage.src = "data:image/jpeg;base64," + ledata[0].attachmentData;
+						
+						console.log(leimage.src);
+					} catch(err) {
+						alert("No image found.");
+						leimage.src = "img/default-avatar.png";
+					}			
+				}
+			}				
+		}	
+		request.send();
+	}	
+	
+    // SEARCH DATABASE FOR USERS
+    function findUsers() {
+        // GET TEXTBOX HANDLE TO ADD TO QUERY
+        var userQuery = document.getElementById('myFilter').value;
 		var queryURL = "http://democv.softrek.com:8082/clearview-api/external/prospect/search?token=f37f22f4-4eea-4c93-a241-2723a879971e&q=" + userQuery;
 		//alert("user called");
 		console.log("FIND USER: Query is" + queryURL);
-
+		//var items="";
+		//var searchTable = $('#jsontable').dataTable();
 		var request = new XMLHttpRequest();
 		request.open("GET", queryURL, true);
 		request.onreadystatechange = function() { // Call a function when the state changes.
-		if (request.readyState == 4) {
+			if (request.readyState == 4) {
 				if (request.status == 200 || request.status == 0) {
-					var tweets = JSON.parse(request.responseText);
-					console.log("Response is " + request.responseText);
-					console.log("Number of results is " + tweets.length);
-					console.log("Idnumber for first result is " + tweets[0].idNumber);
-					//alert("hi");
+					var ledata = JSON.parse(request.responseText);
+					//console.log("Response is " + request.responseText);
+					//console.log("Number of results is " + ledata.length);
+
+					// TODO: CHECK IF DATA IS ALREADY IN LIST BEFORE ADDING
+					//       OR CLEAR ENTIRE LIST
+					for(var i = 0; i < ledata.length; i++) {
+						var namenode = document.createTextNode(ledata[i].fullName);
+						var idnumber = ledata[i].idNumber;
+						var phone = ledata[i].preferredPhone;
+						var addy = ledata[i].preferredAddress;
+						
+						var linky = document.createElement("a");					
+						//alert($("li").get(i));
+						linky.appendChild(namenode);
+						// MAYBE IMPLEMENT GETTING DATA THROUGH LINK
+						linky.setAttribute('href', "#"  );	
+						
+						// CREATE EVENT TO SET DATA IN MAIN HTML
+						 var node = document.createElement("LI"),
+							obj = {
+								// NEED TO GET NODE VALUE UNLIKE THE FOLLOWING VARS
+								inname: namenode.nodeValue,
+								inphone: phone,
+								inaddy: addy,
+								idnum: idnumber,
+								
+								handleEvent: function() {
+									//var liAddy = document.createElement("LI");
+									//liAddy.appendChild(addy);
+									//setInfo(this);
+									//alert(this.inaddy);
+									//document.getElementById("mainList").removeChild();
+									// UPDATE THE PROFILE VALUES
+									document.getElementById("nameid").innerHTML = "Name: " + this.inname;
+									document.getElementById("phoneid").innerHTML = "Phone: " + this.inphone;
+									if(this.inaddy.length > 8){ 
+										document.getElementById("addressid").innerHTML = "Address: " + this.inaddy.substring(0,23);
+										document.getElementById("addyoverflow").innerHTML = "(continued) " + this.inaddy.substring(23);
+									}
+									else{ document.getElementById("addressid").innerHTML = "Address: " + this.inaddy; }
+									// OLD CODE TO APPEND NODE, WE CAN JUST CHANGE THE TEXT
+									//document.getElementById("mainList").appendChild((document.createElement("LI").appendChild(this.name)));
+									// IMPORTANT FUNCTIONS
+									updateProfilePic(this.idnum);								
+									$("#searchPanel").panel("close");
+								}
+							}; 						
+				
+						// FOR WHEN USER CLICKS LINK, CALLS FUNCTION TO SET DATA
+						node.addEventListener("click", obj, false);
+						node.appendChild(linky);		
+						document.getElementById("lelist").appendChild(node);
+						//console.log((document.getElementById("lelist")).childNodes[0].nodeValue);
+						//alert($( "li" ).index( listItems ));
+					};
 				}
+					
+				// CLEAR THE SEARCH LIST SO WE CAN SHOW SEARCH VALUES
+				$("#myFilter").val("");
+				$("#myFilter").trigger("keyup");			
 			}
 		}
 		

@@ -7,6 +7,9 @@ get images
 http://democv.softrek.com:8082/clearview-api/external/prospect/1/images?token=f37f22f4-4eea-4c93-a241-2723a879971e
 
 
+delete
+http://democv.softrek.com:8082/clearview-api/external/attachment/delete?idNumber=1&transnum=397932&token=f37f22f4-4eea-4c93-a241-2723a879971e
+
 http://democv.softrek.com:8082/clearview-api/external/prospect/1/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e
 
 

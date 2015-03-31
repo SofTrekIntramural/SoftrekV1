@@ -32,10 +32,10 @@
 		<script type="text/javascript" src="cordova.js"></script>		
 		<!-- SHOULD ALLOW FOR CROSS DOMAIN AJAX... -->
 		<script type="text/javascript" src="js/jquery.js"> <!--http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js-->
-		$(document).bind("mobileinit", function() {
-			$.support.cors = true;
-			$.mobile.allowCrossDomainPages = true;
-		});
+			$(document).bind("mobileinit", function() {
+				$.support.cors = true;
+				$.mobile.allowCrossDomainPages = true;
+			});
 		</script>
 		<script type="text/javascript" src="js/jmobile.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
@@ -45,10 +45,10 @@
         <title>Softrek Picture Upload</title>
     </head>
     <body>
-        <div class="app">
-            <h1><center>InstaSoft</center></h1>
-        </div>			
-	
+		<div data-role="main" class="ui-content">
+            <h1><center>PeopleTrek</center></h1>
+			<img src="img/peeplogo.jpg" style="max-width: 100%;"></img>
+		
 	<script>
 	$(document).ready(function () {
 		$("#uLogin").click(function (e) {
@@ -57,6 +57,7 @@
 			var uName=document.getElementById("username").value;
 			var uPass=document.getElementById("password").value;
 			
+			window.location="main.html";
 			$.ajax({
 				url: "http://democv.softrek.com:8082/clearview-api/j_spring_security_check",
 				type: 'POST',
@@ -80,17 +81,17 @@
 					console.log(jqXHR.responsetext);
 					console.log(data.search("ClearView - Login") != -1);
 	
-				if(!(data.search("ClearView - Login") != -1)) {
-							alert("authentication success");
-							window.location="main.html";
-				} else {
-							// response is JSON version of the Spring's Authentication
-							alert("authentication failure");
-						}
+					if(!(data.search("ClearView - Login") != -1)) {
+						alert("authentication success");
+						window.location="main.html";
+					} else {
+						// response is JSON version of the Spring's Authentication
+						alert("authentication failure");
+					}
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
-					alert("Incorrect login.");
+					alert("Check your internet connection.");
 				}         
 			});
 		//e.unbind();
@@ -99,24 +100,21 @@
 	</script>	
 
 	<!-- BUTTONS FOR SELECTIONS	-->
-	<div class="picButtons">
-	     Username:
-		<input id="username" type="text">
-		 Password:
-		<input id="password" type="password">
-		<br><br>
-	    <button class="ui-btn ui-icon-lock ui-btn-icon-left" id="uLogin">Login</button>
-		<br>	
+			 Username:
+			<input id="username" type="text">
+			 Password:
+			<input id="password" type="password">
+			<button class="ui-btn ui-icon-lock ui-btn-icon-left"id="uLogin">Login</button>
 
-	    <!-- THIS FORM WORKS AS WELL AS THE AJAX CODE ABOVE FOR LOGIN
-		<form id="loginForm" method="POST" action="http://democv.softrek.com:8082/clearview-api/j_spring_security_check" enctype="application/x-www-form-urlencoded">
-		    <input name="j_username" type="text" value="apidev">
-			<input name="j_password" type="text" value="student_dev15">
-		    <input name="tenant-name" type="text" value="dev"> 
-			<input name="app-name" type="text" value="ClearView">
-			<input name="app-version" type="text" value="2.4.6-SNAPSHOT"> 
-			<input type="submit" value="Login" onclick="return sendForm(this.form);" />
-		</form> -->		
+			<!-- THIS FORM WORKS AS WELL AS THE AJAX CODE ABOVE FOR LOGIN
+			<form id="loginForm" method="POST" action="http://democv.softrek.com:8082/clearview-api/j_spring_security_check" enctype="application/x-www-form-urlencoded">
+				<input name="j_username" type="text" value="apidev">
+				<input name="j_password" type="text" value="student_dev15">
+				<input name="tenant-name" type="text" value="dev"> 
+				<input name="app-name" type="text" value="ClearView">
+				<input name="app-version" type="text" value="2.4.6-SNAPSHOT"> 
+				<input type="submit" value="Login" onclick="return sendForm(this.form);" />
+			</form> -->	
 	</div>	
 		
     </body>
