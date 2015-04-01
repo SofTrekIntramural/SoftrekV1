@@ -17,7 +17,7 @@
 -->
 
 <html>
-    <head>
+    <head style="background-color: white;">
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
@@ -41,9 +41,9 @@
 		<script type="text/javascript" src="js/softrek.js"></script>
 		<!-- FOR KEEPING PAGES WITHIN THE APP -->
 		<script type="text/javascript"> app.initialize(); </script>	
-        <title>Softrek Picture Upload</title>
+        <title>Upload</title>
     </head>
-    <body>
+    <body style="height: 100%;">
 	
 	    <!-- PANELS MUST BE LISTED ABOVE HEADERS -->
 		<div data-role="panel" id="searchPanel" data-position="right" data-display="overlay"> 
@@ -85,14 +85,14 @@
 			</form>
 	    </div>
 		
-		<div data-role="header" id="myHeader">
-		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all ui-shadow">Upload</a>
-			<h1>PeopleTrek</h1>
-			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all ui-shadow">Search</a>
+		<div data-role="header" id="myHeader" style="background-color: white;">
+		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all ui-shadow" style="background-color: #ec0212; text-shadow: none; color: white;">Upload</a>
+			<h1><img src="img/logo.png" /></h1>
+			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all ui-shadow" style="background-color:#ec0212; text-shadow: none; color: white;">Search</a>
 		</div>
 	
 		<!-- MAIN -->
-		<div data-role="main" class="ui-content">
+		<div data-role="main" class="ui-content" style="background-color: white; height:100%;">
 			<div class="ui-grid-solo ui-responsive">
 				<div class="ui-block-a" style="text-align:center">
 				  
@@ -125,17 +125,16 @@
 							<li id="nameid">Name:</li>
 							<li id="phoneid">Phone:</li>
 							<li id="addressid">Address:</li>
-							<li id="addyoverflow"></li>
 							</ul>
 						</span>
 				</div>
 			</div>
 		</div><!-- /MAIN -->
 
-		<div data-role="footer" style="text-align:center;">	
-			<button class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left" onclick="takePic();">Camera</button>
-			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);">Library</button>		
-			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);">Album</button>			
+		<div data-role="footer" style="text-align:center; background-color: white;margin-top: 79%; margin-bottom: 0px;">	
+			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);" style="background-color: #ec0212; text-shadow: none; color: white;">Library</button>
+			<button class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left" onclick="takePic();" style="background-color: #ec0212; text-shadow: none; color: white;">Camera</button>		
+			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);" style="background-color: #ec0212; text-shadow: none; color: white;">Album</button>			
 		</div>
 
 	</body>
