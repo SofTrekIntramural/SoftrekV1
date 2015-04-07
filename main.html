@@ -17,7 +17,7 @@
 -->
 
 <html>
-    <head style="background-color: white;">
+    <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
@@ -50,7 +50,7 @@
 			<form class="ui-filterable">
 			  <input id="myFilter" data-type="search">
 			</form>
-			<button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUsers()">Search</button> 
+			<button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUsers()" style="background-color: #ec0212; color:white; text-shadow:none;">Search</button> 
 						
 			<ul  id="lelist" data-role="listview" data-autodividers="true" data-filter="true" data-input="#myFilter" data-inset="true">
 			<li><a href="#">Adele</a></li>
@@ -81,14 +81,14 @@
 				<textarea id="textAreaFileContents" style="width:640;height:240" ></textarea> -->
 				<input style="display:none" name="token" type="text" value="f37f22f4-4eea-4c93-a241-2723a879971e">
 				<!-- <input style="display:none" name="uploadType" type="text" value="html5"> -->
-				<input data-icon="action" value="Upload Image" type="submit" >
+				<input value="Upload Image" type="submit" style="background-color: blue; text-shadow:none;">
 			</form>
 	    </div>
 		
-		<div data-role="header" id="myHeader" style="background-color: white;">
-		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all ui-shadow" style="background-color: #ec0212; text-shadow: none; color: white;">Upload</a>
-			<h1><img src="img/logo.png" /></h1>
-			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all ui-shadow" style="background-color:#ec0212; text-shadow: none; color: white;">Search</a>
+		<div data-role="header" id="myHeader" style="background-color: #a7a7a7;">
+		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all" style="background-color: #a7a7a7; width:35px;height: 31px;text-shadow: none; color: white; margin-top:4px; margin-left: -2px;"><p style="margin-top: 7px;">Upload</p></a>
+			<h1 style="margin-top:8px;"><img src="img/inapplogo.png" /></h1>
+			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all" style="background-color:#a7a7a7; text-shadow: none; color: white; height: 31px; width:35px; margin-top:4px; margin-right: -2px;"><p style="margin-top: 7px;">Search</p></a>
 		</div>
 	
 		<!-- MAIN -->
@@ -97,7 +97,7 @@
 				<div class="ui-block-a" style="text-align:center">
 				  
 				    <!-- PROFILE PICTURE -->
-				  	<img id="myImage" src="" style="max-width: 100%;"></img>
+				  	<center><img id="myImage" src="img/blank.png" style="max-width: 240px; max-height: 400px;" /></center>
 					<br>
 					<script>
 						$("#myImage").on("taphold",function(){
@@ -108,8 +108,8 @@
 					</script>
 				
 						<!-- BUTTONS BELOW MAIN PICTURE -->
-						<button class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-notext" onclick=""></button>
-						<button class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-notext" onclick=" document.getElementById('delete-form').submit()">Delete</button>
+						<button class="ui-btn ui-btn-inline" onclick="" style="background-color:white; border: none; box-shadow:none;"><img src="img/left.png" /></button>
+						<button class="ui-btn ui-btn-inline" onclick=" document.getElementById('delete-form').submit()" style="background-color:white; border: none; box-shadow:none;"><img src="img/delete.png" /></button>
 						
 						<!-- DELETE PIC -->
 						<form id="delete-form" style="display:none"  method="GET" action="http://democv.softrek.com:8082/clearview-api/external/attachment/delete?token=f37f22f4-4eea-4c93-a241-2723a879971e" enctype="multipart/form-data">
@@ -118,10 +118,10 @@
 						<input style="display:none" name="token" type="text" value="f37f22f4-4eea-4c93-a241-2723a879971e">
 						<input value="Delete?" type="submit" >
 						</form> 
-						<button class="ui-btn ui-btn-inline ui-icon-arrow-r ui-btn-icon-notext" onclick=""></button>
+						<button class="ui-btn ui-btn-inline" onclick="" style="background-color:white; border: none; box-shadow:none;"><img src="img/right.png" /></button>
 						<!-- USER DATA -->
 						<span>
-							<ul id="mainList" data-role="listview" data-autodividers="false" data-inset="true" style="word-wrap:break-word;">
+							<ul id="mainList" data-role="listview" data-autodividers="false" data-inset="true" style="word-wrap:normal;">
 							<li id="nameid">Name:</li>
 							<li id="phoneid">Phone:</li>
 							<li id="addressid">Address:</li>
@@ -131,10 +131,10 @@
 			</div>
 		</div><!-- /MAIN -->
 
-		<div data-role="footer" style="text-align:center; background-color: white;margin-top: 79%; margin-bottom: 0px;">	
+		<div data-role="footer" style="text-align:center; background-color: #ec0212;">	
 			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);" style="background-color: #ec0212; text-shadow: none; color: white;">Library</button>
 			<button class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left" onclick="takePic();" style="background-color: #ec0212; text-shadow: none; color: white;">Camera</button>		
-			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);" style="background-color: #ec0212; text-shadow: none; color: white;">Album</button>			
+			<button class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);" style="background-color: #ec0212; text-shadow: none; color: white;">Album</button>			
 		</div>
 
 	</body>

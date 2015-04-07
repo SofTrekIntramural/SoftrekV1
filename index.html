@@ -45,10 +45,10 @@
         <title>Upload</title>
     </head>
     <body>
-		<div data-role="main" class="ui-content">
+		<div data-role="main" class="ui-content" style="background-color: white;">
 			<center><img src="img/peeplogo.png" style="background-color: white; width: 100%;"></img></center>
 		
-	<script>
+	<script >
 	$(document).ready(function () {
 		$("#uLogin").click(function (e) {
 			e.preventDefault(); //Prevent Default action.
@@ -100,10 +100,10 @@
 
 	<!-- BUTTONS FOR SELECTIONS	-->
 			 Username:
-			<input id="username" type="text">
+			<input id="username" type="text" style="background-color: white;">
 			 Password:
-			<input id="password" type="password">
-			<button class="ui-btn ui-btn-icon-left"id="uLogin" style="background-color: #ec0212; text-shadow: none; color: white; border: 1px solid #000000; margin-top: 1em;">Login</button>
+			<input id="password" type="password" style="background-color: white;">
+			<button class="ui-btn ui-btn-icon-left "id="uLogin" style="background-color: #ec0212; text-shadow: none; color: white; border: 1px solid #000000; margin-top: 1em;">Login</button>
 
 			<!-- THIS FORM WORKS AS WELL AS THE AJAX CODE ABOVE FOR LOGIN
 			<form id="loginForm" method="POST" action="http://democv.softrek.com:8082/clearview-api/j_spring_security_check" enctype="application/x-www-form-urlencoded">
