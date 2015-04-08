@@ -85,10 +85,10 @@
 			</form>
 	    </div>
 		
-		<div data-role="header" id="myHeader" style="background-color: #a7a7a7;">
-		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all" style="background-color: #a7a7a7; width:35px;height: 31px;text-shadow: none; color: white; margin-top:4px; margin-left: -2px;"><p style="margin-top: 7px;">Upload</p></a>
+		<div data-role="header" id="myHeader" style="background-color: #a7a7a7; text-align: center;">
+		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all" style="background-color: #a7a7a7; width:35px; height: 31px;text-shadow: none; color: white; margin-top:4px; margin-left: -2px; border: none; border-right: 2px solid white;"><p style="margin-top: 7px; margin-left: -2px;">Upload</p></a>
 			<h1 style="margin-top:8px;"><img src="img/inapplogo.png" /></h1>
-			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all" style="background-color:#a7a7a7; text-shadow: none; color: white; height: 31px; width:35px; margin-top:4px; margin-right: -2px;"><p style="margin-top: 7px;">Search</p></a>
+			<a href="#searchPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all" style="background-color:#a7a7a7; text-shadow: none; color: white; height: 31px; width:35px; margin-top:4px; margin-right: -2px; border: none; border-left: 2px solid white;"><p style="margin-top: 7px; margin-left: -2px;">Search</p></a>
 		</div>
 	
 		<!-- MAIN -->
@@ -97,13 +97,13 @@
 				<div class="ui-block-a" style="text-align:center">
 				  
 				    <!-- PROFILE PICTURE -->
-				  	<center><img id="myImage" src="img/blank.png" style="max-width: 240px; max-height: 400px;" /></center>
+				  	<center><img id="myImage" src="img/blank.png" style="max-width: 240px; max-height: 400px;" /></center><!--have image in to see placement-->
 					<br>
 					<script>
 						$("#myImage").on("taphold",function(){
 							var delform = document.getElementById('delete-form');
 							delform.submit();
-							<!-- IMPLEMENT DELETE FORM IN AJAX OR CODE RATHER THAN FORM --?	
+							<!--IMPLEMENT DELETE FORM IN AJAX OR CODE RATHER THAN FORM-->
 						}); 
 					</script>
 				
@@ -131,10 +131,13 @@
 			</div>
 		</div><!-- /MAIN -->
 
-		<div data-role="footer" style="text-align:center; background-color: #ec0212;">	
-			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);" style="background-color: #ec0212; text-shadow: none; color: white;">Library</button>
-			<button class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left" onclick="takePic();" style="background-color: #ec0212; text-shadow: none; color: white;">Camera</button>		
-			<button class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);" style="background-color: #ec0212; text-shadow: none; color: white;">Album</button>			
+		<div data-role="footer" style="text-align:center; background-color: #ec0212; border: none;">	
+
+			<button class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);" style="background-color: #ec0212; text-shadow: none; color: white; height: 38px; margin-left: 8px;">Library</button>
+			
+			<button class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left" onclick="takePic();" style="background-color: #ec0212; text-shadow: none; color: white; height: 50px;">Camera</button>		
+			
+			<button class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);" style="background-color: #ec0212; text-shadow: none; color: white; height: 38px; ">Album</button>			
 		</div>
 
 	</body>
