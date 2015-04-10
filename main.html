@@ -84,6 +84,51 @@
 				<input value="Upload Image" type="submit" style="background-color: blue; text-shadow:none;">
 			</form>
 	    </div>
+	    
+	    <div data-role="panel" id="phonePanel" data-position="right"> 
+			<div data-role="main" class="ui-content">
+				<ul data-role="listview" data-autodividers="true" data-inset="true">
+					<li><a href="#binaPage">Glen</a></li>
+					<li><a href="#kenPage">John</a></li>
+					<li><a href="#newPage">New</a></li>
+				</ul>
+			<a href="#newPage" class="ui-btn">Add New Entry</a>
+			</div>
+		</div>	
+		<div data-role="panel" id="binaPage" data-position="right"> 
+			<h2>Glen Noworyta</h2>
+			<p>Phone number: 716-906-9891</p>
+			<p>Address: 184 Caesar Boulevard
+			<br>Williamsville, NY 14221</p>
+			<p>Email: glennowo@buffalo.edu</p>
+			<a href="#phonePanel" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b ui-icon-arrow-l ui-btn-icon-left">Back</a>
+		</div> 
+		<div data-role="panel" id="kenPage" data-position="right"> 
+			<h2>John Smith</h2>
+			<p>Phone number: 212-330-5200</p>
+			<p>Address: 123 Main Street
+			<br>New York, NY 10118-3299 USA</p>
+			<p>Email: jsmith@gmail.com</p>
+			<a href="#phonePanel" data-rel="close" class="ui-btn ui-btn-inline ui-corner-all ui-btn-b ui-icon-arrow-l ui-btn-icon-left">Back</a>
+		</div>
+		<div data-role="panel" id="newPage" data-position="right"> 
+			<form method="post" action="demoform.asp">
+					<p><label for="contact">Contact name:</label></p>
+					<p><input type="text" name="contact" id="contact"></p>
+					<p><label for="fullname">Full name:</label></p>
+					<p><input type="text" name="fullname" id="fullname"></p>
+					<p><label for="phone">Phone:</label></p>
+					<p><input type="text" name="phone" id="phone"></p>
+					<p><label for="address">Address:</label></p>
+					<p><input type="text" name="address" id="address"></p>
+					<p><label for="email">E-mail:</label></p>
+					<p><input type="email" name="email" id="email"></p>
+					<input type="submit" data-inline="true" value="Submit">
+			</form>
+			
+			
+			<a href="#phonePanel" data-rel="close" class="ui-btn ui-btn-inline ui-corner-all ui-btn-b ui-icon-arrow-l ui-btn-icon-left">Back</a>
+		</div>
 		
 		<div data-role="header" id="myHeader" style="background-color: #a7a7a7; text-align: center;">
 		    <a href="#uploadPanel" class="ui-btn ui-btn-inline ui-icon-cloud ui-btn-icon-left ui-corner-all" style="background-color: #a7a7a7; width:35px; height: 31px;text-shadow: none; color: white; margin-top:4px; margin-left: -2px; border: none; border-right: 2px solid white;"><p style="margin-top: 7px; margin-left: -2px;">Upload</p></a>
