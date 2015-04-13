@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
+<widget id="com.phonegap.helloworld" version="3.7.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
    <name>SofTrek Mobile</name>
 
      <content src="index.html" />
@@ -26,3 +27,4 @@
 	<access origin="http://democv.softrek.com:8082/" />
 	<access origin="*" />
 	<access subdomains="true" uri="http://democv.softrek.com:8082" /> 
+</widget>
