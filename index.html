@@ -82,16 +82,16 @@
 					console.log(data.search("ClearView - Login") != -1);
 	
 					if(!(data.search("ClearView - Login") != -1)) {
-						window.confirm("authentication success");
+						window.alert("authentication success");
 						window.location="main.html";
 					} else {
 						// response is JSON version of the Spring's Authentication
-						window.confirm("authentication failure");
+						window.alert("authentication failure");
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
-					window.confirm("Check your internet connection.");
+					window.alert("Check your internet connection.");
 				}         
 			});
 		//e.unbind();
