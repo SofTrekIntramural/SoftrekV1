@@ -1,0 +1,29 @@
+http://democv.softrek.com:8082/clearview-api/external/prospect/search?token=f37f22f4-4eea-4c93-a241-2723a879971e&q=homer%20simpson
+
+get id 
+http://democv.softrek.com:8082/clearview-api/external/prospect/get/1636431?token=f37f22f4-4eea-4c93-a241-2723a879971e
+
+get images
+http://democv.softrek.com:8082/clearview-api/external/prospect/1/images?token=f37f22f4-4eea-4c93-a241-2723a879971e
+
+
+http://democv.softrek.com:8082/clearview-api/external/prospect/1/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e
+
+
+post for picture upload
+Referer: http://democv.softrek.com:8082/clearview-api/view/prospect/1
+Content-Length: 150788
+Content-Type: multipart/form-data; boundary=---------------------------177571263622728
+Cookie: JSESSIONID=AEA77F636B06A8BFA058A9DC350ADAD4; username=apidev; tenant=dev; B100Serverpoolcookie=55440591.1.3043994432.4073402744
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+
+$.getJSON("search.json", function(ajaxresult){
+alert("hi");
+alert(JSON.stringify(ajaxresult);
+$("#SiteName").append(ajaxresult.firstName);
+$("#Tutorial_Name").append(ajaxresult.idNumber);
+$("#Lesson").append(ajaxresult.Lesson);
+});

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+    http://www.apache.org/licenses/LICENSE-2.0
+	 
+    * Authors: Softrek Student Dev Team
+    * Project: Softrek Photo Upload
+    * Description: Program using Phonegap to upload pictures to a server                                 
+                   and allow tag and search functionality
+	* Install: replace index.html with the provided one	also
+               add softrek.js to js folder	
+    * TODO:	 - Documentation
+			 - Sanity/Security Checking
+			 - CSS HTML
+			 - Test on multiple browsers, and then IOS...
+	* Notes: Some functions do not work in IE11  
+-->
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+		<!-- SCRIPT CALLS BEGIN -->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>		
+		<!-- SHOULD ALLOW FOR CROSS DOMAIN AJAX... -->
+		<script type="text/javascript" src="js/jquery.js"> <!--http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js-->
+		$(document).bind("mobileinit", function() {
+			$.support.cors = true;
+			$.mobile.allowCrossDomainPages = true;
+		});
+		</script>
+		<script type="text/javascript" src="js/jmobile.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/softrek.js">	</script>
+		<!-- FOR KEEPING PAGES WITHIN THE APP -->
+		<script type="text/javascript"> app.initialize(); </script>	
+        <title>Softrek Picture Upload</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1><center>InstaSoft</center></h1>
+        </div>			
+	
+	<script>
+	$(document).ready(function () {
+		$("#uLogin").click(function (e) {
+			e.preventDefault(); //Prevent Default action.
+			//var formData = new FormData(this);
+			var uName=document.getElementById("username").value;
+			var uPass=document.getElementById("password").value;
+			
+			$.ajax({
+				url: "http://democv.softrek.com:8082/clearview-api/j_spring_security_check",
+				type: 'POST',
+				data:  'j_username='+uName+'&j_password='+uPass+'&tenant-name=dev&app-name=ClearView&app-version=2.4.6-SNAPSHOT',
+				contentType: "application/x-www-form-urlencoded",
+				//cache: false,
+				//mimeType:"multipart/form-data", 
+				//dataType: "json", 
+				//processData:false,
+				complete: function(xhr){ 
+				console.log(xhr.getAllResponseHeaders());
+											console.log(jqXHR.statusText);
+				console.log(xhr.responseText);
+				console.log(xhr.statusCode());
+				},
+				success: function(data, textStatus, jqXHR)
+				{
+				console.log(jqXHR.readyState);
+								console.log(jqXHR.status);
+							console.log(jqXHR.statusText);
+				console.log(jqXHR.responsetext);
+				console.log(data.search("ClearView - Login") != -1);
+	
+				if(!(data.search("ClearView - Login") != -1)) {
+							alert("authentication success");
+							window.location="main.html";
+				} else {
+							// response is JSON version of the Spring's Authentication
+							alert("authentication failure");
+						}
+				},
+				error: function(jqXHR, textStatus, errorThrown)
+				{
+					alert("Incorrect login.");
+				}         
+			});
+		//e.unbind();
+		});   
+	});
+	</script>	
+
+	<!-- BUTTONS FOR SELECTIONS	-->
+	<div class="picButtons">
+	     Username:
+		<input id="username" type="text">
+		 Password:
+		<input id="password" type="password">
+		<br><br>
+	    <button class="ui-btn ui-icon-lock ui-btn-icon-left" id="uLogin">Login</button>
+		<br>	
+
+	    <!-- THIS FORM WORKS AS WELL AS THE AJAX CODE ABOVE FOR LOGIN
+		<form id="loginForm" method="POST" action="http://democv.softrek.com:8082/clearview-api/j_spring_security_check" enctype="application/x-www-form-urlencoded">
+		    <input name="j_username" type="text" value="apidev">
+			<input name="j_password" type="text" value="student_dev15">
+		    <input name="tenant-name" type="text" value="dev"> 
+			<input name="app-name" type="text" value="ClearView">
+			<input name="app-version" type="text" value="2.4.6-SNAPSHOT"> 
+			<input type="submit" value="Login" onclick="return sendForm(this.form);" />
+		</form> -->		
+	</div>	
+		
+    </body>
+</html>

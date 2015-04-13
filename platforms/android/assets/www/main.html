@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+    http://www.apache.org/licenses/LICENSE-2.0
+	 
+    * Authors: Softrek Student Dev Team
+    * Project: Softrek Photo Upload
+    * Description: Program using Phonegap to upload pictures to a server                                 
+                   and allow tag and search functionality
+	* Install: replace index.html with the provided one	also
+               add softrek.js to js folder	
+    * TODO:	 - Documentation
+			 - Sanity/Security Checking
+			 - CSS HTML
+			 - Test on multiple browsers, and then IOS...
+	* Notes: Some functions do not work in IE11  
+-->
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+		<!-- SCRIPT CALLS BEGIN -->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>		
+		<!-- SHOULD ALLOW FOR CROSS DOMAIN AJAX... -->
+		<script type="text/javascript" src="js/jquery.js"> <!--http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js-->
+		$(document).bind("mobileinit", function() {
+			$.support.cors = true;
+			$.mobile.allowCrossDomainPages = true;
+		});
+		</script>
+		<script type="text/javascript" src="js/jmobile.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/softrek.js">	</script>
+		<!-- FOR KEEPING PAGES WITHIN THE APP -->
+		<script type="text/javascript"> app.initialize(); </script>	
+        <title>Softrek Picture Upload</title>
+    </head>
+    <body>
+		<div data-role="panel" id="myPanel" data-position="right"> 
+			<input type="text" name="userTxt" id="userTxt" value="Search for user...">
+			<button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUser()">Search</button>
+	    </div>
+		
+		<div data-role="header">
+		    <a href="#" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+			<h1>InstaSoft</h1>
+			<a href="#myPanel" class="ui-btn ui-btn-inline ui-icon-search ui-btn-icon-left ui-corner-all ui-shadow">Search</a>
+		</div>
+	
+	
+		<!-- BUTTONS FOR SELECTIONS	-->
+		<div data-role="main" class="ui-content">
+		    <br><br>
+		    Picture Upload:
+			<form id="the-form" method="POST" action="http://democv.softrek.com:8082/clearview-api/external/prospect/1/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e" enctype="multipart/form-data">
+				<input name="description" type="text" value="Enter description">
+				<input name="attachmentType" type="text" value="PRO">
+				<input name="data" type="file">
+				<input style="display:none" name="token" type="text" value="f37f22f4-4eea-4c93-a241-2723a879971e">
+				<input data-icon="action" value="Upload Image" type="submit" >
+			</form>
+			<br>
+			<br>
+			<!-- <input type="text" name="userTxt" id="userTxt" value="Search for user..."> -->
+			<!-- <button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUser()">Search</button> -->
+			<br>		
+
+			<br>
+			<img id="myImage" src=""></img> <!--  left: 50%; style="width:250px; height:120px; margin-left:-125px; position: absolute" -->
+			<br>
+		</div>	
+
+		<div data-role="footer">	
+			<button class="ui-btn ui-icon-camera ui-btn-icon-left" onclick="takePic();">Take a Picture</button>
+			<button class="ui-btn ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.PHOTOLIBRARY);">Library</button>		
+			<button class="ui-btn ui-icon-grid ui-btn-icon-left" onclick="getPic(pictureSource.SAVEDPHOTOALBUM);">Album</button>	
+		</div>
+	</body>
+</html>
