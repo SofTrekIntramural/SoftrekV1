@@ -139,6 +139,7 @@
 
 	// LOGIN 
 	function ulogin(){
+		window.location="main.html";
 	//$(document).ready(function () {
 		//$("#uLogin").click(function (e) {
 			//e.preventDefault(); //Prevent Default action	
