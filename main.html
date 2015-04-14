@@ -52,9 +52,6 @@
 			</form>
 			<button class="ui-btn ui-icon-search ui-btn-icon-left" id="search" onclick="findUsers()" style="background-color: #ec0212; color:white; text-shadow:none;">Search</button> 
 						
-			<ul  id="lelist" data-role="listview" data-autodividers="true" data-filter="true" data-input="#myFilter" data-inset="true">
-			<li><a href="#">Adele</a></li>
-			</ul>
 			<!-- MAKE THIS INTO A BUTTON -->
 			<!-- <a href="#myHeader" data-rel="close">Close</a> -->
 	    </div>
@@ -88,29 +85,41 @@
 	    <div data-role="panel" id="phonePanel" data-position="right"> 
 			<div data-role="main" class="ui-content">
 				<ul data-role="listview" data-autodividers="true" data-inset="true">
-					<li><a href="#binaPage">Glen</a></li>
-					<li><a href="#kenPage">John</a></li>
-					<li><a href="#newPage">New</a></li>
+					<li><a href="#binaPage">Glen Noworyta</a></li>
+					<li><a href="#kenPage">Michael Kulbacki</a></li>
+					<li><a href="#tomPage">Tom Ludwig</a></li>
+					<li><a href="#newPage">New Contact</a></li>
 				</ul>
 			<a href="#newPage" class="ui-btn" style="background-color: #ec0212; text-shadow: none; border:none; color:white;">Add New Entry</a>
 			</div>
 		</div>	
 		<div data-role="panel" id="binaPage" data-position="right"> 
 			<h2>Glen Noworyta</h2>
-			<p>Phone number: 716-906-9891</p>
-			<p>Address: 184 Caesar Boulevard
+			<p><b>Phone number:</b> 716-906-9891</p>
+			<p><b>Address:</b> 184 Caesar Boulevard
 			<br>Williamsville, NY 14221</p>
-			<p>Email: glennowo@buffalo.edu</p>
+			<p><b>Email:</b> glennowo@buffalo.edu</p>
 			<a href="#phonePanel" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b ui-icon-arrow-l ui-btn-icon-left" style="background-color: #ec0212; text-shadow: none; border:none;">Back</a>
 		</div> 
+
 		<div data-role="panel" id="kenPage" data-position="right"> 
-			<h2>John Smith</h2>
-			<p>Phone number: 212-330-5200</p>
-			<p>Address: 123 Main Street
-			<br>New York, NY 10118-3299 USA</p>
-			<p>Email: jsmith@gmail.com</p>
+			<h2>Michael Kulbacki</h2>
+			<p><b>Phone Number:</b> 716-374-4288</p>
+			<p><b>Address:</b> 30 Hillside Parkway
+			<br>New York, NY 14086 USA</p>
+			<p><b>Email:</b> mdkulbac@buffalo.edu</p>
 			<a href="#phonePanel" data-rel="close" class="ui-btn ui-btn-inline ui-corner-all ui-btn-b ui-icon-arrow-l ui-btn-icon-left" style="background-color: #ec0212; text-shadow: none; border:none;">Back</a>
 		</div>
+
+		<div data-role="panel" id="tomPage" data-position="right"> 
+			<h2>Tom Ludwig</h2>
+			<p><b>Phone number:</b> 716-555-5555</p>
+			<p><b>Address:</b> 666 sesame street
+			<br>New York, NY</p>
+			<p><b>Email:</b> tludwig@buffalo.edu</p>
+			<a href="#phonePanel" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b ui-icon-arrow-l ui-btn-icon-left" style="background-color: #ec0212; text-shadow: none; border:none;">Back</a>
+		</div> 
+
 		<div data-role="panel" id="newPage" data-position="right"> 
 			<form method="post" action="demoform.asp">
 					<p><label for="contact">Contact name:</label></p>
