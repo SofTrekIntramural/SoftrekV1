@@ -229,18 +229,17 @@
 		upform.action = "http://democv.softrek.com:8082/clearview-api/external/prospect/" + idnum + "/image/upload?token=" + keyToken;
 		//upform.action = "http://democv.softrek.com:8082/clearview-api/external/prospect/1/image/upload?token=f37f22f4-4eea-4c93-a241-2723a879971e";
 		delformID.value = idnum;
-				var x = document.createElement("iframe");
+		var x = document.createElement("iframe");
 						
-				x.addEventListener('load', function(){ 			
-				x.contentWindow.document.getElementById('softrek_Tools_0_softrek_tools_VisualTool_0_label').click();
-				//var token = x.contentWindow.document.getElementsByClassName('colsingle_cont'); //.getElementsByTagName( 'div' )[0];
-				});
-						//x.style.setProperty('display', 'none')
-						x.height = 380;
-						x.width = 220;
-						x.setAttribute("src", "http://democv.softrek.com:8082/clearview-api/view/prospect/1/attachments"); 
-						document.getElementById("uploadPanel").appendChild(x);
-		
+		x.addEventListener('load', function(){ 			
+			x.contentWindow.document.getElementById('softrek_Tools_0_softrek_tools_VisualTool_0_label').click();
+			//var token = x.contentWindow.document.getElementsByClassName('colsingle_cont'); //.getElementsByTagName( 'div' )[0];
+		});
+		//x.style.setProperty('display', 'none')
+		x.height = 380;
+		x.width = 220;
+		x.setAttribute("src", "http://democv.softrek.com:8082/clearview-api/view/prospect/1/attachments"); 
+		document.getElementById("uploadPanel").appendChild(x);
 	}
 	
 	// QUERY SERVER FOR PROFILE PICTURE
@@ -305,7 +304,6 @@
     function findUsers() {
 		// GET THE Token
 		var keyToken = window.localStorage.getItem("key");
-		alert("token is " + keyToken)
         // GET TEXTBOX HANDLE TO ADD TO QUERY
         var userQuery = document.getElementById('myFilter').value;
 		var queryURL = "http://democv.softrek.com:8082/clearview-api/external/prospect/search?token=" + keyToken + "&q=" + userQuery;
