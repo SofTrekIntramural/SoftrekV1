@@ -142,10 +142,10 @@
 		<!-- MAIN -->
 		<div data-role="main" class="ui-content" style="background-color: white; height:100%;">
 			<div class="ui-grid-solo ui-responsive">
-				<div class="ui-block-a" style="text-align:center">
+				<div class="ui-block-a" style="text-align:center;">
 				  
 				    <!-- PROFILE PICTURE -->
-				  	<center><img id="myImage" src="img/blank.png" style="max-width: 240px; max-height: 700px;" /></center><!--have image in to see placement-->
+				  	<center><img id="myImage" src="img/blank.png" style="width: 240px; max-height: 900px; max-width: 400px; margin-bottom: -20px; margin-top: 15px;" /></center><!--have image in to see placement-->
 					<br>
 					<script>
 						$("#myImage").on("taphold",function(){
@@ -156,7 +156,8 @@
 					</script>
 				
 						<!-- BUTTONS BELOW MAIN PICTURE -->
-						<button class="ui-btn ui-btn-inline" onclick="" style="background-color:white; border: none; box-shadow:none;"><img src="img/left.png" /></button>
+						<button class="ui-btn ui-btn-inline" onclick="" style="background-color:white; border: none; box-shadow:none;"><img src="img/left.png" style="max-width:50px; max-height: 56px;"/></button>
+
 						<button class="ui-btn ui-btn-inline" onclick=" document.getElementById('delete-form').submit()" style="background-color:white; border: none; box-shadow:none;"><img src="img/delete.png" style="max-width:50px; max-height: 56px;" /></button>
 						
 						<!-- DELETE PIC -->
@@ -166,7 +167,7 @@
 						<input style="display:none" name="token" type="text" value="f37f22f4-4eea-4c93-a241-2723a879971e">
 						<input value="Delete?" type="submit" >
 						</form> 
-						<button class="ui-btn ui-btn-inline" onclick="" style="background-color:white; border: none; box-shadow:none;"><img src="img/right.png" /></button>
+						<button class="ui-btn ui-btn-inline" onclick="" style="background-color:white; border: none; box-shadow:none;"><img src="img/right.png" style="max-width:50px; max-height: 56px;"/></button>
 						<!-- USER DATA -->
 						<span>
 							<ul id="mainList" data-role="listview" data-autodividers="false" data-inset="true" style="word-wrap:normal;">
